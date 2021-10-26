@@ -24,30 +24,30 @@ export default {
         }
     },
     methods: {
-        addOneItem(todoItem) {
-            // 텍스트 값과 텍스트 체크 여부의 값을 불린값으로 넣어줌
-            // 체크여부 completed , 체크값 : item
-            var obj = {
-                completed: false,
-                item: todoItem
-            };
-            // todoItem접근하려면 this로 접근할 수 있음
-            console.log(this.todoItems);
+        // addOneItem(todoItem) {
+        //     // 텍스트 값과 텍스트 체크 여부의 값을 불린값으로 넣어줌
+        //     // 체크여부 completed , 체크값 : item
+        //     const obj = {
+        //         completed: false,
+        //         item: todoItem
+        //     };
+        //     // todoItem접근하려면 this로 접근할 수 있음
+        //     console.log(this.todoItems);
 
-            // 저장하는 로직
-            // JSON.stringify(obj) 자바스크립트의 오브젝트를 스트링으로 저장
-            localStorage.setItem(todoItem, JSON.stringify(obj));
-            this.todoItems.push(obj);
-        },
-        removeOneItem(todoItem, index) {
-            // 데이터 베이스 영역에서 지우기
-            localStorage.removeItem(todoItem.item);
+        //     // 저장하는 로직
+        //     // JSON.stringify(obj) 자바스크립트의 오브젝트를 스트링으로 저장
+        //     localStorage.setItem(todoItem, JSON.stringify(obj));
+        //     this.todoItems.push(obj);
+        // },
+        // removeOneItem(todoItem, index) {
+        //     // 데이터 베이스 영역에서 지우기
+        //     localStorage.removeItem(todoItem.item);
 
-            // 화면영역(스크립트 영역)에서 지우기
-            // splice 특정 인덱스에서 하나 지우기
-            this.todoItems.splice(index, 1);
+        //     // 화면영역(스크립트 영역)에서 지우기
+        //     // splice 특정 인덱스에서 하나 지우기
+        //     this.todoItems.splice(index, 1);
 
-        },
+        // },
         toggleOneItem(todoItem, index) {
             console.log(index);
             // 안좋은 패턴
@@ -68,24 +68,12 @@ export default {
         }
     },
 
-    // app.vue가 생성되자 마자 실행됨
-    created() {
-        // 내부 저장소에서 데이터를 가져와서 뿌려줌
-        console.log('created');
-        if (localStorage.length > 0) {
-            for (var i = 0; i < localStorage.length; i++) {
-                if (localStorage.key(i) !== 'loglevel:webpack-dev-server')
-                    // 스트링으로 저장된 것을 다시 오브젝트로
-                    this.todoItems.push(JSON.parse(localStorage.getItem(localStorage.key(i))));
-
-            }
-        }
-    },
+    // 컴포너너트 등록
     components: {
-        TodoHeader: TodoHeader,
-        TodoFooter: TodoFooter,
-        TodoInput: TodoInput,
-        TodoList: TodoList
+        TodoHeader,
+        TodoFooter,
+        TodoInput,
+        TodoList
     },
 
 }

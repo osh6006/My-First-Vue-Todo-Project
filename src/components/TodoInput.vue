@@ -32,7 +32,7 @@
 </template>
 
 <script>
-import warning from './common/Modal.vue'
+import Modal from './common/Modal.vue'
 
 export default {
     data() {
@@ -47,7 +47,9 @@ export default {
             // 값이 있을 때만 동작
             if (this.newTodoItem !== '') {
                 // 상위 컴포넌트로 값 보내기
-                this.$emit('addTodoItem', this.newTodoItem);
+                // this.$emit('addTodoItem', this.newTodoItem);
+                const text = this.newTodoItem.trim();
+                this.$store.commit('addOneItem', text);
                 this.clearInput();
 
             } else {
@@ -61,7 +63,8 @@ export default {
     },
     // 인풋의 하위 컴포넌트
     components: {
-        Modal: warning
+        // 향상된 객체 리터럴
+        Modal
     }
 }
 </script>

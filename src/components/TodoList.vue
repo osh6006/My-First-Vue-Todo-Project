@@ -1,7 +1,7 @@
 <template>
 <div>
     <transition-group name="list" tag="ul">
-        <li v-for="(todoItem, index) in propsdata" v-bind:key="todoItem" class="shadow">
+        <li v-for="(todoItem, index) in this.$store.state.todoItems" v-bind:key="todoItem" class="shadow">
         <i class="checkBtn fas fa-check" v-bind:class="{checkBtnCompleted: todoItem.completed}" @click="toggleComplete(todoItem, index)"></i>
             <!-- v-bind 클래스 completed가 true가 되는 순간 실행-->
             <span v-bind:class="{textCompleted: todoItem.completed}">{{todoItem.item}}</span>
@@ -15,14 +15,13 @@
 
 <script>
 export default {
-    // app.vue에서 내려받은 데이터
-    props:['propsdata'],
     // 페이지가 시작될 때 실행되는 메소드
     methods: {
         // 휴지통 버튼을 클릭했을 때 
         removetodo(todoItem, index) {
-            console.log(todoItem, index);
-            this.$emit('removeItem', todoItem, index);
+            // console.log(todoItem, index);
+            // this.$emit('removeItem', todoItem, index);
+             this.$store.commit('removeOneItem', todoItem, index);
         },
         // 
         toggleComplete(todoItem, index){
